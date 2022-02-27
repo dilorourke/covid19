@@ -1,10 +1,12 @@
 #Creating the database in MySQL
-CREATE DATABASE covid19_data
+CREATE DATABASE covid19_data;
 
-#Creating a table 
+USE covid19_data;
+
+#Creating a table for the covid deaths csv
 CREATE TABLE covid_deaths (
 	iso_code CHAR(3), continent TINYTEXT, 
-	location TEXT, , date DATE, population INT, total_cases INT, 
+	location TEXT, date_ DATE, population INT, total_cases INT, 
 	new_cases INT, new_cases_smoothed FLOAT(3), total_deaths INT, 
 	new_deaths INT, new_deaths_smoothed FLOAT(3), total_cases_per_million FLOAT(3), 
 	new_cases_per_million FLOAT(3), new_cases_smoothed_per_million FLOAT(3), 
@@ -15,3 +17,66 @@ CREATE TABLE covid_deaths (
 	weekly_icu_admissions_per_million FLOAT(3), weekly_hosp_admissions INT, 
 	weekly_hosp_admissions_per_million FLOAT(3)
 	);
+
+CREATE TABLE covid_vaccinations (
+	iso_code CHAR(3), continent TINYTEXT, location TEXT, date_ DATE, 
+	new_tests INT, total_tests INT, 
+	total_tests_per_thousand FLOAT(3), 
+	new_tests_per_thousand FLOAT(3), 
+	new_tests_smoothed INT, 
+	new_tests_smoothed_per_thousand FLOAT(3), 
+	positive_rate FLOAT(3), tests_per_case FLOAT(3), 
+	tests_units TEXT, total_vaccinations INT, 
+	people_vaccinated INT, people_fully_vaccinated INT, 
+	total_boosters INT, new_vaccinations INT, 
+	new_vaccinations_smoothed INT, 
+	total_vaccinations_per_hundred FLOAT(3), 
+	people_vaccinated_per_hundred FLOAT(3), 
+	people_fully_vaccinated_per_hundred FLOAT(3), 
+	total_boosters_per_hundred FLOAT(3), 
+	new_vaccinations_smoothed_per_million INT, 
+	new_people_vaccinated_smoothed INT, 
+	new_people_vaccinated_smoothed_per_hundred FLOAT(3), 
+	stringency_index FLOAT(3), population_density FLOAT(3), 
+	median_age INT, aged_65_older FLOAT(3), aged_70_older FLOAT(3), 
+	gdp_per_capita FLOAT(3), extreme_poverty FLOAT(3), 
+	cardiovasc_death_rate FLOAT(3), diabetes_prevalence FLOAT(3), 
+	female_smokers FLOAT(3), male_smokers FLOAT(3), 
+	handwashing_facilities FLOAT(3), 
+	hospital_beds_per_thousand FLOAT(3), 
+	life_expectancy FLOAT(3), human_development_index FLOAT(3), 
+	excess_mortality_cumulative_absolute FLOAT(3), 
+	excess_mortality_cumulative FLOAT(3), 
+	excess_mortality FLOAT(3), 
+	excess_mortality_cumulative_per_million FLOAT(3)
+	);
+	
+
+
+#Loading data from my CSVs in the repository into my MySQL DB
+LOAD DATA LOCAL INFILE 'C:/Users/Dillon/Documents/Coding Learning/Projects/covid19/CovidDeaths.csv'
+INTO TABLE covid_deaths
+COLUMNS TERMINATED BY ','
+IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'C:/Users/Dillon/Documents/Coding Learning/Projects/covid19/CovidVaccinations.csv'
+INTO TABLE covid_vaccinations
+COLUMNS TERMINATED BY ','
+IGNORE 1 LINES;
+
+#Checking the table has populated
+SELECT *
+FROM covid19_data.covid_deaths
+LIMIT 100;
+#Checking the table has populated
+SELECT *
+FROM covid19_data.covid_vaccinations
+LIMIT 100
+
+
+#Total Cases vs Total Deaths
+#Shows death rate (Likelihood of death after contraction)
+SELECT location, date_, total_cases, total_deaths, (total_deaths/total_cases)*100 AS prop_death
+FROM covid19_data.covid_deaths
+WHERE  date_ = '2022-02-26'
+order by 5 DESC;
