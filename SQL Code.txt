@@ -80,3 +80,10 @@ SELECT location, date_, total_cases, total_deaths, (total_deaths/total_cases)*10
 FROM covid19_data.covid_deaths
 WHERE  date_ = '2022-02-26'
 order by 5 DESC;
+
+#Total Cases vs Population
+#Shows percentage of population that have tested positive for the virus (ordered from low to high)
+SELECT location, date_, total_cases, population, (total_cases/population)*100 AS perc_pop_pos
+FROM covid19_data.covid_deaths
+WHERE  date_ = '2022-02-26'
+order by 5 DESC;
