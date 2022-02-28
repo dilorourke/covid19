@@ -1,9 +1,9 @@
-#Creating the database in MySQL
+-- Creating the database in MySQL
 CREATE DATABASE covid19_data;
 
 USE covid19_data;
 
-#Creating a table for the covid deaths csv
+-- Creating a table for the covid deaths csv
 CREATE TABLE covid_deaths (
 	iso_code CHAR(3), continent TINYTEXT, 
 	location TEXT, date_ DATE, population INT, total_cases INT, 
@@ -53,7 +53,7 @@ CREATE TABLE covid_vaccinations (
 	
 
 
-#Loading data from my CSVs in the repository into my MySQL DB
+-- Loading data from my CSVs in the repository into my MySQL DB
 LOAD DATA LOCAL INFILE 'C:/Users/Dillon/Documents/Coding Learning/Projects/covid19/CovidDeaths.csv'
 INTO TABLE covid_deaths
 COLUMNS TERMINATED BY ','
@@ -64,26 +64,52 @@ INTO TABLE covid_vaccinations
 COLUMNS TERMINATED BY ','
 IGNORE 1 LINES;
 
-#Checking the table has populated
+-- Checking the table has populated
 SELECT *
 FROM covid19_data.covid_deaths
 LIMIT 100;
-#Checking the table has populated
+-- Checking the table has populated
 SELECT *
 FROM covid19_data.covid_vaccinations
 LIMIT 100
 
 
-#Total Cases vs Total Deaths
-#Shows death rate (Likelihood of death after contraction)
+-- Total Cases vs Total Deaths
+-- Shows death rate (Likelihood of death after contraction)
 SELECT location, date_, total_cases, total_deaths, (total_deaths/total_cases)*100 AS prop_death
 FROM covid19_data.covid_deaths
 WHERE  date_ = '2022-02-26'
 order by 5 DESC;
 
-#Total Cases vs Population
-#Shows percentage of population that have tested positive for the virus (ordered from low to high)
+-- Total Cases vs Population
+-- Shows percentage of population that have tested positive for the virus (ordered from low to high)
 SELECT location, date_, total_cases, population, (total_cases/population)*100 AS perc_pop_pos
 FROM covid19_data.covid_deaths
 WHERE  date_ = '2022-02-26'
 order by 5 DESC;
+
+-- Finding countries with highest death counts.alter
+-- Needed to add the where clause due to data in table for continents and the world. Clause excludes the data to show only countries
+-- Change the <> to = to filter by continents & the world instead of countries
+SELECT location, MAX(total_deaths) as totaldeathcount
+FROM covid19_data.covid_deaths
+WHERE continent <> ""
+GROUP BY location
+ORDER BY totaldeathcount DESC;
+
+-- Running a check on the "World" count, comparing the datas value vs my calculated value
+-- Pulling the value from the data
+SELECT location, MAX(total_deaths) as totaldeathcount
+FROM covid19_data.covid_deaths
+WHERE location = "world"
+GROUP BY location
+ORDER BY totaldeathcount DESC;
+
+-- Calculating it myself
+SELECT SUM(totals) 
+FROM
+    (SELECT MAX(total_deaths) AS totals
+    FROM covid_deaths
+    WHERE continent <> ""
+    GROUP BY location)
+AS totalworlddeaths;
