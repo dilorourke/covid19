@@ -113,3 +113,12 @@ FROM
     WHERE continent <> ""
     GROUP BY location)
 AS totalworlddeaths;
+
+
+-- Joining the vaccinations and deaths table
+-- This will inner join all columns (join where both tables match in the equations below) both tables
+SELECT *
+FROM covid19_data.covid_deaths dea
+JOIN covid19_data.covid_vaccinations vac
+	ON dea.location = vac.location
+	AND dea.date_ = vac.date_
