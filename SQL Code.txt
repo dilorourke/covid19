@@ -147,3 +147,59 @@ WHERE dea.location = "Ireland" AND (dea.date_ < '2020-12-28' OR (dea.date_ >= 20
 INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/%vaccs_vs_%deaths_ireland.csv' 
     FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'
 ;
+
+
+-- Calculating the Cumulative Sum of Vaccinations as days go by
+SELECT dea.date_, dea.location, population, vac.new_vaccinations,
+SUM(vac.new_vaccinations) OVER (partition by location ORDER BY location, dea.date_)
+FROM covid19_data.covid_deaths dea
+JOIN covid19_data.covid_vaccinations vac
+	ON dea.location = vac.location
+	AND dea.date_ = vac.date_
+WHERE dea.location = "Ireland" 
+;
+
+
+USE covid19_data;
+
+-- Calculating the Cumulative Sum of Vaccinations as days go by
+-- Common Table Expression
+WITH pop_vs_vac (Date, Continent, Location, Population, NewVaccs, CumSumVac)
+as
+(
+-- Calculating the Cumulative Sum of Vaccinations as days go by
+SELECT dea.date_, dea.continent, dea.location, population, new_people_vaccinated_smoothed,
+SUM(new_people_vaccinated_smoothed) OVER (partition by location ORDER BY location, dea.date_) AS cumsum_vac
+FROM covid19_data.covid_deaths dea
+JOIN covid19_data.covid_vaccinations vac
+	ON dea.location = vac.location
+	AND dea.date_ = vac.date_
+WHERE dea.continent IS NOT NULL
+)
+-- Calculating the cumulative % pop vaccinated
+SELECT * , (CumSumVac/Population)*100 AS cum_perc_vac
+FROM pop_vs_vac;
+
+-- Using a Temp table
+DROP TABLE  IF EXISTS PercentPopulationVaccinated;
+CREATE TEMPORARY TABLE PercentPopulationVaccinated
+(
+Date_ date,
+Continent nvarchar(255), 
+Location nvarchar(255),
+Population numeric,
+New_Vaccinations numeric,
+CumSumVac numeric
+);
+INSERT INTO PercentPopulationVaccinated
+(SELECT dea.date_, dea.continent, dea.location, population, new_people_vaccinated_smoothed,
+SUM(new_people_vaccinated_smoothed) OVER (partition by location ORDER BY location, dea.date_) AS cumsum_vac
+FROM covid19_data.covid_deaths dea
+JOIN covid19_data.covid_vaccinations vac
+	ON dea.location = vac.location
+	AND dea.date_ = vac.date_
+WHERE dea.continent IS NOT NULL
+);
+
+SELECT * , (CumSumVac/Population)*100 AS cum_perc_vac
+FROM PercentPopulationVaccinated
