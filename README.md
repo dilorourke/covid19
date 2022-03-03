@@ -1,7 +1,15 @@
 # covid19
+--- Summary ---
 Exploratory Analysis of a covid19 deaths data set from ourworldindata.org. It includes data on deaths, cases vaccinations per country, continent etc.
 
-Identifying and filtering out unwanted or missing data using SQL.
+---  File breakdown  ---
+The data can be found in the csvs and xlsx files in the main folder.
+Data extracts from the SQL server can be found in the "MySQL Exports" folder.
+The raw SQL code used can be found in SQLCode.txt
+There is an accompanying word doc with a journal of notes that were kept throughout the project with links and screenshots of visualisations in Tableau.
+
+---  Tasks Done  ---
+Identified and filtered out unwanted or missing data using SQL.
 
 Calculated Death Rate.
 Showed the countries with highest death rates.
