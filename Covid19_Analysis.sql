@@ -206,3 +206,23 @@ JOIN covid19_data.covid_vaccinations vac
     AND dea.date_ = vac.date_
 WHERE dea.location = "Ireland"
 ;
+
+
+DROP VIEW IF EXISTS Highest_Deaths;
+
+CREATE VIEW Highest_Deaths AS
+
+WITH max_death (Country, Date_, CaseCount, DeathCount, DeathRate)
+AS
+(
+-- Shows death rate (Likelihood of death after contraction)
+SELECT location, date_, total_cases, total_deaths, (total_deaths/total_cases)*100 AS prop_death
+FROM covid19_data.covid_deaths
+WHERE total_deaths > 10 AND continent <> ""
+order by 5 DESC
+)
+SELECT Country, MAX(DeathRate) AS MaxDeathRate
+FROM max_death
+GROUP BY Country
+ORDER BY 2 DESC
+;
