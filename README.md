@@ -11,14 +11,19 @@ There is an accompanying word doc with a journal of notes that were kept through
 ---  Tasks Done  --- <br />
 Identified and filtered out unwanted or missing data using SQL.
   <br />
+  <br />
 Calculated Death Rate.
 Showed the countries with highest death rates.
   <br />
+  <br />
 Worked out the % of the population that have tested positive for the virus.
+  <br />
   <br />
 Manually checked the total number of deaths in the world by filtering out non-countries and summing and grouping by country. Cross-checked this with the data for the region "World" in the data and found a suspected error in the data.
   <br />
+  <br />
 Used an inner join to investigate the effect of vaccinations on deaths.
+  <br />
   <br />
 Case Study: Ireland	<br />																											
 	- Cleaned missing data <br />
