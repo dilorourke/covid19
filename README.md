@@ -1,4 +1,4 @@
-# covid19
+# Exploratory Analysis of a Covid-19 Data Set
 --- Summary --- <br />
 Exploratory Analysis of a covid19 deaths data set from ourworldindata.org. It includes data on deaths, cases vaccinations per country, continent etc.
 
