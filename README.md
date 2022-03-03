@@ -1,14 +1,16 @@
 # Exploratory Analysis of a Covid-19 Data Set
---- Summary --- <br />
+
+# --- Summary --- <br />
 Exploratory Analysis of a covid19 deaths data set from ourworldindata.org. It includes data on deaths, cases vaccinations per country, continent etc.
 
----  File breakdown  --- <br />
+# ---  File breakdown  --- <br />
 The data can be found in the csvs and xlsx files in the main folder.
-Data extracts from the SQL server can be found in the "MySQL Exports" folder.
+SQL script file included as Covid19_Analysis.sql
 The raw SQL code used can be found in SQLCode.txt
+Data extracts from the SQL server can be found in the "MySQL Exports" folder.
 There is an accompanying word doc with a journal of notes that were kept throughout the project with links and screenshots of visualisations in Tableau.
 
----  Tasks Done  --- <br />
+# ---  Tasks Done  --- <br />
 Identified and filtered out unwanted or missing data using SQL.
   <br />
   <br />
