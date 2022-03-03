@@ -122,3 +122,28 @@ FROM covid19_data.covid_deaths dea
 JOIN covid19_data.covid_vaccinations vac
 	ON dea.location = vac.location
 	AND dea.date_ = vac.date_
+
+
+
+-- Pulling columnns of interest from the joined table to look at people vac vs new deaths in ireland to see effect of vaccines on deaths
+-- Filtering for Irish data
+-- Exporting the query result to a csv file for Tableau upload
+SELECT dea.location, dea.date_, total_vaccinations, people_vaccinated, people_fully_vaccinated, total_deaths, new_deaths
+FROM covid19_data.covid_deaths dea
+JOIN covid19_data.covid_vaccinations vac
+	ON dea.location = vac.location
+	AND dea.date_ = vac.date_
+WHERE dea.location = "Ireland" AND (dea.date_ < '2020-12-28' OR (dea.date_ >= 2020-12-28 AND people_fully_vaccinated <>0 ))
+INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/vaccs_vs_deaths_ireland_clean.csv' 
+    FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'
+
+-- Looking at the effect of vac on death rate in Ireland
+SELECT dea.location, population, dea.date_, (people_fully_vaccinated/population)*100 AS PercentageVac, (total_deaths/total_cases)*100 AS PercDeath
+FROM covid19_data.covid_deaths dea
+JOIN covid19_data.covid_vaccinations vac
+	ON dea.location = vac.location
+	AND dea.date_ = vac.date_
+WHERE dea.location = "Ireland" AND (dea.date_ < '2020-12-28' OR (dea.date_ >= 2020-12-28 AND people_fully_vaccinated <>0 ))
+INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/%vaccs_vs_%deaths_ireland.csv' 
+    FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'
+;
