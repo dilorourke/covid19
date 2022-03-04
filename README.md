@@ -39,9 +39,7 @@ Used both CTEs and Temp Tables to calculate the Cumulative Sum of Vaccinations a
 	
 ## Screenshots
 ![alt text][Highest Death Rates Reached]
-
 [Highest Death Rates Reached]: https://github.com/dilorourke/covid19/blob/main/Screenshots/Highest%20Death%20Rates%20(%25)%20Reached.png "Highest Death Rates Reached"
 
 ![alt text][Effects of Vaccinations on Deaths per day]
-
 [Highest Death Rates Reached]: https://github.com/dilorourke/covid19/blob/main/Screenshots/Effect%20of%20Vaccines%20on%20DeathsDay.png "Effects of Vaccinations on Deaths per day"
