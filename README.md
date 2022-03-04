@@ -38,6 +38,6 @@ Used both CTEs and Temp Tables to calculate the Cumulative Sum of Vaccinations a
 	- Exported the data into tableau and created a dashboard. (Link in the notes document in seciton 3.6)
 	
 ## Screenshots
-<img src="Screenshots/Highest Death Rates (%) Reached.png">
+<img src="Screenshots/HighestDeath RatesReached.png">
 <img src="Screenshots/Effect of Vaccines on DeathsDay.png">
 <img src="Screenshots/Effects of Vaccines on Covid-19 in Ireland.png">
