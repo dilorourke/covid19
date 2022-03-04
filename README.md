@@ -1,16 +1,16 @@
 # *** Exploratory Analysis of a Covid-19 Data Set ***
 
-##Summary
+## Summary
 Exploratory Analysis of a covid19 deaths data set from ourworldindata.org. It includes data on deaths, cases vaccinations per country, continent etc.
 
-##File breakdown
+## File breakdown
 The data can be found in the csvs and xlsx files in the main folder.
 SQL script file included as Covid19_Analysis.sql
 The raw SQL code used can be found in SQLCode.txt
 Data extracts from the SQL server can be found in the "MySQL Exports" folder.
 There is an accompanying word doc with a journal of notes that were kept throughout the project with links and screenshots of visualisations in Tableau.
 
-##Tasks Done
+## Tasks Done
 Identified and filtered out unwanted or missing data using SQL.
   <br />
   <br />
@@ -29,7 +29,7 @@ Used an inner join to investigate the effect of vaccinations on deaths.
   <br />
 Used both CTEs and Temp Tables to calculate the Cumulative Sum of Vaccinations and the cumulative % pop vaccinated<br />
 <br />
-###Case Study: Ireland																									
+### Case Study: Ireland																									
 	- Cleaned missing data <br />
 	- Compared the total number of vaccinations vs the number of new deaths	<br />				
 	- Calculated percentage of population vaccinated and the death rate to show the relationship. <br />
