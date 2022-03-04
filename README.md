@@ -30,10 +30,18 @@ Used an inner join to investigate the effect of vaccinations on deaths.
 Used both CTEs and Temp Tables to calculate the Cumulative Sum of Vaccinations and the cumulative % pop vaccinated<br />
 <br />
 ### Case Study: Ireland																									
-	- Cleaned missing data <br />
-	- Compared the total number of vaccinations vs the number of new deaths	<br />				
-	- Calculated percentage of population vaccinated and the death rate to show the relationship. <br />
-	- Identified a misleading characteristic in the data <br />
-	- Smoothed some data to avoid misleading stats <br />
-	- Exported the data into tableau and created a dashboard. (Link in the notes document in seciton 3.6) <br />
-	<br />
+	- Cleaned missing data
+	- Compared the total number of vaccinations vs the number of new deaths			
+	- Calculated percentage of population vaccinated and the death rate to show the relationship. 
+	- Identified a misleading characteristic in the data
+	- Smoothed some data to avoid misleading stats
+	- Exported the data into tableau and created a dashboard. (Link in the notes document in seciton 3.6)
+	
+## Screenshots
+![alt text][Highest Death Rates Reached]
+
+[Highest Death Rates Reached]: https://github.com/dilorourke/covid19/blob/main/Screenshots/Highest%20Death%20Rates%20(%25)%20Reached.png "Highest Death Rates Reached"
+
+![alt text][Effects of Vaccinations on Deaths per day]
+
+[Highest Death Rates Reached]: https://github.com/dilorourke/covid19/blob/main/Screenshots/Effect%20of%20Vaccines%20on%20DeathsDay.png "Effects of Vaccinations on Deaths per day"
